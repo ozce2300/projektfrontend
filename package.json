@@ -2,9 +2,10 @@
   "name": "projektfrontend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "source": "src/index.html",
+  "src": {
+    "start": "parcel",
+    "build": "parcel build"
   },
   "keywords": [],
   "author": "",
