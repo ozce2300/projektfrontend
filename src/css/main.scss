@@ -1,25 +1,9 @@
 @use 'normalize';
-@use 'base';
-@use 'layout';
+@use './base/base';
+@use './layout/all';
+@use './layout/header';
+@use './layout/grid';
+@use './layout/body';
 @use 'component';
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap');
-
-* {
-
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 62.5%;
-    font-family: 'Roboto', sans-serif;
-}
-
-li {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
+@use './base/keyframes'
 

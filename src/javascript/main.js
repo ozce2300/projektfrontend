@@ -19,3 +19,48 @@ function closeMenu() {
     hamburger.classList.remove("active");
     navMenu.classList.remove("active");
 }
+
+// Ändra färg på header vid scroll
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    const bars = document.querySelectorAll('.bar'); // Hämtar alla element med klassen 'bar'
+    const navLogo = document.querySelector('.nav-logo')
+    const navLinks = document.querySelectorAll('.nav-link')
+
+    
+    if (window.scrollY > 50) {
+        header.style.backgroundColor = 'rgba(255, 255, 255, 0.9)'; // Ny bakgrundsfärg för headern
+        navLogo.style.color = '#f99d5f';
+        bars.forEach(bar => {
+            bar.style.backgroundColor = '#f99d5f'; // Ny färg för varje 'bar' element
+        });
+        navLinks.forEach(link => {
+            link.style.color = '#f99d5f'; // Ny textfärg
+        });
+
+    } else {
+        header.style.backgroundColor = 'transparent'; // Ursprunglig bakgrundsfärg
+        navLogo.style.color = 'white';
+        navLinks.forEach(link => {
+            link.style.color = 'white'; // Ny textfärg
+        });
+        bars.forEach(bar => {
+            bar.style.backgroundColor = 'white'; // Ursprunglig färg för varje 'bar' element
+        });
+    }
+});
+
+// Kontroll av href
+document.querySelectorAll('a.nav-link').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const targetID = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetID);
+        
+        window.scrollTo({
+            top: targetElement.offsetTop - 68, 
+            behavior: 'smooth'
+        });
+    });
+});
