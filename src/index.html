@@ -22,10 +22,10 @@
                         <a href="#main-side-inner-two" class="nav-link">Meny</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">About</a>
+                        <a href="#main-side-inner-three" class="nav-link">Boka bord</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Contact</a>
+                        <a href="#" class="nav-link"></a> 
                     </li>
                 </ul>
                 <div class="hamburger">
@@ -46,6 +46,7 @@
 
             <div id="main-side">
                 <section id="main-side-inner-one">
+                    <div class="main-background">
                     <h1 class="h1-main-side-rubrik">Dollar Hamburgarbar</h1>
                     <p class="p-main-side">
                         Hos oss hittar du saftiga hamburgare gjorda på de bästa råvarorna.
@@ -57,22 +58,56 @@
                         en snabb lunch,
                         en trevlig middag med vänner eller en familjemiddag. Kom förbi och njut av en
                         hamburgarupplevelse utöver det vanliga!</p>
-                    </section>
+                    </div>
+                </section>
                 <section id="main-side-inner-two">
+                    <div class="bild-ikon-div">
+                        <img src="./images/menuikon.png" class="Ikon-bild" alt="Boka Ikon">
+                    </div>
                     <h1 class="h1-main-side-Meny">Meny</h1>
                     <div id="meny">
-                        <h5>Hamburgare</h5>
-                        <h5>Dryck</h5>
-                        <h5>Efterrätt</h5>
-                    </section>
+                        <p class="p-menu">Hamburgare</p>
+                        <p class="p-menu">Dryck</p>
+                        <p class="p-menu">Efterrätt</p>
+                </section>
+                <section id="main-side-inner-three">
+                    <form method="ost" id="table-booking">
+                        <div class="bild-ikon-div">
+                            <img src="./images/bokaikon.png" class="Ikon-bild" alt="Boka Ikon">
+                        </div>
+                        <h1 class="h1-form">Boka Bord</h1>
+                        <h2 class="h2-form">Skriv in era uppgifter och dagen ni vill boka bord.</h2>
+                        <br><label for="guestname">Namn:</label>
+                        <input type="text" id="guestname" name="guestname">
 
-                </div>
+                        <br><label for="number">Telefonnummer:</label>
+                        <input type="tel" id="number" name="number">
+
+                        <br> <label for="email">Email:</label>
+                        <input type="email" id="email" name="email">
+
+                        <br> <label for="reservation-date">Datum:</label>
+                        <input type="date" id="reservation-date" name="reservation-date">
+
+                        <br> <label for="reservation-time">Tid:</label>
+                        <input type="time" id="reservation-time" name="reservation-time">
+
+                        <br> <button type="submit" id="button-form">Skicka</button>
+                    </form>
+
+                </section>
 
 
 
             </div>
-        </main>
+    </div>
+    </main>
 
+    <footer>
+        
+
+
+    </footer>
     </div>
 
 </body>

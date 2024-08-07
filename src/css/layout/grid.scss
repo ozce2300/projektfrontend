@@ -3,7 +3,7 @@ main {
     grid-template-areas:
         "header header header"
         "main main main"
-        "a a a";
+        "footer footer footer";
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 100vh 1fr 1fr;
 }
