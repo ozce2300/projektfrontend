@@ -3,6 +3,9 @@
 //Hamburgar bar
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
+const header = document.querySelector(".header")
+
+if(header) {
 
 hamburger.addEventListener("click", mobileMenu);
 
@@ -71,3 +74,4 @@ document.querySelectorAll('a.nav-link').forEach(anchor => {
         // Om href inte börjar med '#', gör ingenting (länken fungerar som vanligt)
     });
 });
+}
