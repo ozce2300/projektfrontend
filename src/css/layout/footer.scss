@@ -1,4 +1,102 @@
 footer {
-    grid-area: footer;
-    background-color: rbga(255, 255, 1, 0.8);
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(146, 144, 144);
+    padding: 40px;
+    gap: 20px;
 }
+
+.oppet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+.oppet-h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.5rem;
+    font-weight: 100;
+    color: white;
+    margin: 0;
+}
+
+.oppet-ul {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+}
+
+.tider {
+    display: flex;
+    gap: 20px;
+    font-size: 1.5rem;
+    font-weight: 100;
+    color: white;
+    padding: 0;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+.contact-h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.5rem;
+    font-weight: 100;
+    color: white;
+    margin: 0;
+}
+
+.contact-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.contact-ul {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 0;
+}
+
+.location {
+    display: flex;
+    gap: 20px;
+    font-size: 1.5rem;
+    font-weight: 100;
+    color: white;
+    padding: 0;
+}
+
+.sociala-medier {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+.style-sociala-medier {
+    margin-bottom: 20px;
+}
+
+.sociala-medier-h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.5rem;
+    font-weight: 100;
+    color: white;
+    margin: 0;
+}
+
+.sociala-medier-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+

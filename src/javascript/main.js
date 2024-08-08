@@ -53,14 +53,21 @@ window.addEventListener('scroll', function() {
 // Kontroll av href
 document.querySelectorAll('a.nav-link').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        e.preventDefault();
+        // Kontrollera om href börjar med '#' (intern länk)
+        if (this.getAttribute('href').startsWith('#')) {
+            e.preventDefault(); // Förhindra standardbeteendet
 
-        const targetID = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetID);
-        
-        window.scrollTo({
-            top: targetElement.offsetTop - 68, 
-            behavior: 'smooth'
-        });
+            const targetID = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetID);
+
+            // Kontrollera om målelementet finns
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 68, // Justera för eventuell fast header
+                    behavior: 'smooth'
+                });
+            }
+        }
+        // Om href inte börjar med '#', gör ingenting (länken fungerar som vanligt)
     });
 });
