@@ -66,7 +66,7 @@ if (header) {
                 // Kontrollera om målelementet finns
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 68, // Justera för eventuell fast header
+                        top: targetElement.offsetTop - 88.3, // Justera för eventuell fast header
                         behavior: 'smooth'
                     });
                 }
@@ -98,52 +98,52 @@ function showModal() {
 
 //Posta bokning
 const tableBooking = document.getElementById('table-booking')
-let url = ('https://api.dollar.se/api/posttable')
 
+if (tableBooking) {
+    tableBooking.addEventListener('submit', function bookTable(event) {
+        event.preventDefault(); // Förhindrar att formuläret skickas innan valideringen
+        let url = ('https://api.dollar.se/api/posttable')
+        const customer_name = document.getElementById('guestname').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('number').value;
+        const reservation_date = document.getElementById('reservation-date').value;
+        const reservation_time = document.getElementById('reservation-time').value;
+        const number_of_guests = document.getElementById('guests').value
+        const errorsEl = document.getElementById('errors')
 
-tableBooking.addEventListener('submit', function bookTable(event) {
-    event.preventDefault(); // Förhindrar att formuläret skickas innan valideringen
-    const customer_name = document.getElementById('guestname').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('number').value;
-    const reservation_date = document.getElementById('reservation-date').value;
-    const reservation_time = document.getElementById('reservation-time').value;
-    const number_of_guests = document.getElementById('guests').value
-    const errorsEl = document.getElementById('errors')
+        //Valedering
+        let errors = [];
 
-    //Valedering
-    let errors = [];
+        if (customer_name === "") {
+            errors.push("Skriv in ditt namn");
+        }
 
-    if (customer_name === "") {
-        errors.push("Skriv in ditt namn");
-    }
+        if (phone === "" || isNaN(phone)) {
+            errors.push("Skriv in ditt telefonnummer");
+        }
 
-    if (phone === "" || isNaN(phone)) {
-        errors.push("Skriv in ditt telefonnummer");
-    }
+        if (email === "") {
+            errors.push("Skriv in din emailadress");
+        }
 
-    if (email === "") {
-        errors.push("Skriv in din emailadress");
-    }
+        if (number_of_guests === "" || isNaN(number_of_guests)) {
+            errors.push("Skriv in antal gäster");
+        }
 
-    if (number_of_guests === "" || isNaN(number_of_guests)) {
-        errors.push("Skriv in antal gäster");
-    }
+        if (reservation_date === "") {
+            errors.push("Välj datum");
+        }
 
-    if (reservation_date === "") {
-        errors.push("Välj datum");
-    }
-
-    if (reservation_time === "") {
-        errors.push("Välj tid");
-    }
+        if (reservation_time === "") {
+            errors.push("Välj tid");
+        }
 
         // Kontrollera öppettider
         const dayOfWeek = new Date(reservation_date).getDay(); // 0 = Söndag, 1 = Måndag, etc.
         const time = reservation_time;
-    
+
         const isValidTime = (time >= '11:00' && time <= '21:00'); // Default öppettider Måndag - Torsdag
-    
+
         switch (dayOfWeek) {
             case 0: // Söndag
                 errors.push("Restaurangen är stängd på söndagar");
@@ -168,48 +168,95 @@ tableBooking.addEventListener('submit', function bookTable(event) {
                 break;
         }
 
-    if (errors.length > 0) {
-        //Felmeddelanden
-        errorsEl.innerHTML = `
+        if (errors.length > 0) {
+            //Felmeddelanden
+            errorsEl.innerHTML = `
         <ul class="span-ul">
                 ${errors.map(error => `<li class="span-li"> <p class="span-p"> ${error}</p></li>`).join('')}
             </ul>        `
-    } else {
-        let bookedTable = {
-            customer_name: customer_name,
-            email: email,
-            phone: phone,
-            reservation_date: reservation_date,
-            reservation_time: reservation_time,
-            number_of_guests: number_of_guests
-        };
+        } else {
+            let bookedTable = {
+                customer_name: customer_name,
+                email: email,
+                phone: phone,
+                reservation_date: reservation_date,
+                reservation_time: reservation_time,
+                number_of_guests: number_of_guests
+            };
 
-        // Skicka bokningsdata till servern
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bookedTable)
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Något gick fel med bokningen');
-                }
+            // Skicka bokningsdata till servern
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bookedTable)
             })
-            .then(data => {
-                console.log('Booking successful:', data);
-                tableBooking.reset();
-                document.getElementById('errors').innerHTML = '';
-                showModal();
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Något gick fel med bokningen');
+                    }
+                })
+                .then(data => {
+                    console.log('Booking successful:', data);
+                    tableBooking.reset();
+                    document.getElementById('errors').innerHTML = '';
+                    showModal();
 
 
-            })
-            .catch(error => {
-                console.error('Fel:', error);
-            });
+                })
+                .catch(error => {
+                    console.error('Fel:', error);
+                });
+        }
+    });
+};
+
+//Logga in
+
+const loginForm = document.getElementById('login-form');
+loginForm.addEventListener('submit', function login(event) {
+    event.preventDefault();
+    const url = "https://api.dollar.se/api/admin/inlog"
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const errors = []
+
+    if (username == "" || password == "") {
+        errors.push("Skriv in ditt användarnamn/lösenord")
+    };
+
+    if (errors.length > 0) {
+        document.getElementById('errors-login').innerHTML = `<p>${errors}</p>`
     }
-});
 
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Inloggningen misslyckades');
+            }
+            return response.json();
+        })
+        .then(data => {
+            localStorage.setItem('token', data.response.token);
+            loginForm.reset();
+        })
+        .catch(error => {
+            console.error('Fel vid inloggning:', error.message);
+            // Här kan du lägga till kod för att hantera felaktig inloggning
+        });
+
+});
