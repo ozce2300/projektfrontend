@@ -127,7 +127,9 @@ main {
 
 .p-menu {
     font-size: 2rem;
+    cursor: pointer;
 }
+
 
 #main-side-inner-three {
     display: flex;
@@ -233,3 +235,29 @@ form button[type="submit"] {
     font-size: 2rem;
 }
 
+.active {
+    text-decoration: underline; 
+    text-underline-offset: 10px; 
+
+}
+
+.menu-item {
+    padding: 10px;
+    border-bottom: #bab9b9 dotted 1px;
+}
+
+.menu-item h3 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.1rem;
+}
+
+.menu-item p {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.8rem;
+    line-height:3rem ;
+}
+
+.menu-item span {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.8rem;
+}
