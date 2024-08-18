@@ -432,12 +432,12 @@ if (containerBigCms) {
     }
 
     //Uppdatera 
-    document.addEventListener('click', function(event) {
-        if(event.target.classList.contains('Update')) {
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('Update')) {
             let id = event.target.dataset.id;
             const token = localStorage.getItem('token');
             let url = `https://api.dollar.se/api/cms/${id}`;
-    
+
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -445,78 +445,78 @@ if (containerBigCms) {
                     'Authorization': `Bearer ${token}`
                 }
             })
-            .then(response => {
-                if(response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Misslyckad hämtning");
-                }
-            })
-            .then(data => {
-                const item = data.results[0];
-                const category = item.category;
-                const name = item.name;
-                const description = item.description;
-                const price = item.price;
-    
-                // Fyll i modalen med hämtade data
-                document.getElementById('updateCategory').value = category;
-                document.getElementById('updateName').value = name;
-                document.getElementById('updateDescription').value = description;
-                document.getElementById('updatePrice').value = price;
-    
-                // Visa modalen
-                const modal = document.getElementById('updateModal');
-                modal.style.display = "block";
-    
-                // Hantera uppdateringsformuläret
-                const updateForm = document.getElementById('updateForm');
-                updateForm.onsubmit = function(e) {
-                    e.preventDefault();
-    
-                    const updatedItem = {
-                        category: document.getElementById('updateCategory').value,
-                        name: document.getElementById('updateName').value,
-                        description: document.getElementById('updateDescription').value,
-                        price: document.getElementById('updatePrice').value
-                    };
-    
-                    fetch(url, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify(updatedItem)
-                    })
-                    .then(response => {
-                        if(response.ok) {
-                            alert('Maträtten uppdaterades!');
-                            modal.style.display = "none"; // Stäng modalen efter uppdatering
-                            location.reload(); // Uppdatera sidan för att visa ändringar
-                        } else {
-                            throw new Error("Misslyckad uppdatering");
-                        }
-                    })
-                    .catch(error => console.error('Error updating item:', error));
-                };
-    
-                // Stäng modal om användaren klickar på "stäng" knappen
-                document.querySelector('.close').addEventListener('click', function() {
-                    modal.style.display = "none";
-                });
-    
-                // Stäng modal om användaren klickar utanför modalen
-                window.addEventListener('click', function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("Misslyckad hämtning");
                     }
-                });
-            })
-            .catch(error => console.error('Error fetching item:', error));
+                })
+                .then(data => {
+                    const item = data.results[0];
+                    const category = item.category;
+                    const name = item.name;
+                    const description = item.description;
+                    const price = item.price;
+
+                    // Fyll i modalen med hämtade data
+                    document.getElementById('updateCategory').value = category;
+                    document.getElementById('updateName').value = name;
+                    document.getElementById('updateDescription').value = description;
+                    document.getElementById('updatePrice').value = price;
+
+                    // Visa modalen
+                    const modal = document.getElementById('updateModal');
+                    modal.style.display = "block";
+
+                    // Hantera uppdateringsformuläret
+                    const updateForm = document.getElementById('updateForm');
+                    updateForm.onsubmit = function (e) {
+                        e.preventDefault();
+
+                        const updatedItem = {
+                            category: document.getElementById('updateCategory').value,
+                            name: document.getElementById('updateName').value,
+                            description: document.getElementById('updateDescription').value,
+                            price: document.getElementById('updatePrice').value
+                        };
+
+                        fetch(url, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify(updatedItem)
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    alert('Maträtten uppdaterades!');
+                                    modal.style.display = "none"; // Stäng modalen efter uppdatering
+                                    location.reload(); // Uppdatera sidan för att visa ändringar
+                                } else {
+                                    throw new Error("Misslyckad uppdatering");
+                                }
+                            })
+                            .catch(error => console.error('Error updating item:', error));
+                    };
+
+                    // Stäng modal om användaren klickar på "stäng" knappen
+                    document.querySelector('.close').addEventListener('click', function () {
+                        modal.style.display = "none";
+                    });
+
+                    // Stäng modal om användaren klickar utanför modalen
+                    window.addEventListener('click', function (event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching item:', error));
         }
     });
-    
+
 
     //Radera
     document.addEventListener('click', async function (event) {
@@ -605,7 +605,8 @@ if (menuContainer) {
                 })
                 .then(data => {
                     fullMenu = data.results; // Spara hela menyn
-                    displayMenuItems(fullMenu); // Visa hela menyn som standard
+                    displayMenuItems(filterMenu('Hamburgare'));
+                    setActiveCategory(getHamburgare); // Sätt Hamburgare-knappen som aktiv
                 })
                 .catch(error => {
                     console.error('Hämtning misslyckades', error.message);
@@ -617,7 +618,7 @@ if (menuContainer) {
         }
 
         function displayMenuItems(items) {
-            menuContainer.innerHTML = ''; 
+            menuContainer.innerHTML = '';
 
             if (Array.isArray(items)) {
                 items.forEach(item => {
@@ -654,48 +655,48 @@ if (menuContainer) {
 };
 const containerBigBooking = document.getElementById('container-big-booking')
 
-if(containerBigBooking) {
+if (containerBigBooking) {
     window.onload = init()
     function init() {
         if (!localStorage.getItem('token')) {
             window.location.href = 'login.html'
         }
     }
-    
+
     document.addEventListener('DOMContentLoaded', () => {
-    const getBooking = document.getElementById('get-booking');
-    const getBookingContent = document.getElementById('get-booking-content');
-    const urlPostTable = "https://api.dollar.se/api/posttable"; 
-    const token = localStorage.getItem('token')
+        const getBooking = document.getElementById('get-booking');
+        const getBookingContent = document.getElementById('get-booking-content');
+        const urlPostTable = "https://api.dollar.se/api/posttable";
+        const token = localStorage.getItem('token')
 
-    // Hämtar bokningar
-    fetch(urlPostTable, {
-        method: "GET",  
-        headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`
+        // Hämtar bokningar
+        fetch(urlPostTable, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
 
-        }
-    })
-    .then(response => {
-        if(response.ok) {
-            return response.json();           
-        } else { 
-            throw new Error('Hämtningen misslyckad');
-        }
-    })
-    .then(data => {
-        console.log(data); 
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Hämtningen misslyckad');
+                }
+            })
+            .then(data => {
+                console.log(data);
 
-        const results = data.results || [];
-        
-        if(results.length === 0) {
-            getBooking.innerHTML = '<h1 class="booking-h1">Inga bokningar finns</h1>';
-        } else {
-            getBooking.innerHTML = '<h1 class="booking-h1">Bokningar:</h1>';
+                const results = data.results || [];
 
-            // Visa varje bokning
-            getBookingContent.innerHTML = results.map(booking => `
+                if (results.length === 0) {
+                    getBooking.innerHTML = '<h1 class="booking-h1">Inga bokningar finns</h1>';
+                } else {
+                    getBooking.innerHTML = '<h1 class="booking-h1">Bokningar:</h1>';
+
+                    // Visa varje bokning
+                    getBookingContent.innerHTML = results.map(booking => `
                 <div class="booking-item" data-id="${booking.id}">
                     <p><strong>Kundnamn:</strong> ${booking.customer_name || 'Ingen kundnamn'}</p>
                     <p><strong>Telefon:</strong> ${booking.phone || 'Ingen telefon'}</p>
@@ -706,41 +707,41 @@ if(containerBigBooking) {
                     <button class="delete-booking" data-id="${booking.id}">Ta Bort</button>
                 </div>
             `).join('');
-        }
-    })
-    .catch(error => {
-        console.error('Fel:', error);
-        getBooking.innerHTML = "<h1>Fel vid hämtning av data</h1>";
-    });
-
-    document.body.addEventListener('click', function(event) {
-        if (event.target.classList.contains('delete-booking')) {
-            const id = event.target.dataset.id;
-            const url = `https://api.dollar.se/api/posttable/${id}`;
-            const token = localStorage.getItem('token');
-
-            fetch(url, {
-                method: "DELETE", 
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${token}`
                 }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Misslyckad radering");  
-                }
-                return response.json(); 
-            })
-            .then(data => {
-                console.log('Raderingen lyckades:', data);
-                // Ta bort det aktuella bokningselementet
-                event.target.closest('.booking-item').remove();
             })
             .catch(error => {
-                console.error('Fel:', error);  
+                console.error('Fel:', error);
+                getBooking.innerHTML = "<h1>Fel vid hämtning av data</h1>";
             });
-        }
+
+        document.body.addEventListener('click', function (event) {
+            if (event.target.classList.contains('delete-booking')) {
+                const id = event.target.dataset.id;
+                const url = `https://api.dollar.se/api/posttable/${id}`;
+                const token = localStorage.getItem('token');
+
+                fetch(url, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Misslyckad radering");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Raderingen lyckades:', data);
+                        // Ta bort det aktuella bokningselementet
+                        event.target.closest('.booking-item').remove();
+                    })
+                    .catch(error => {
+                        console.error('Fel:', error);
+                    });
+            }
+        });
     });
-});
 };
