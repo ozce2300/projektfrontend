@@ -5,7 +5,7 @@ body {
 
 #menu-send {
     font-size: 2rem;
-    color:white;
+    color: white;
 }
 
 #cms-header {
@@ -67,16 +67,16 @@ body {
     font-weight: bold;
 }
 
-#cms-form-container input, 
-#cms-form-container textarea, 
+#cms-form-container input,
+#cms-form-container textarea,
 #cms-form-container select {
     font-size: 2rem;
-    padding: 2rem; 
+    padding: 2rem;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
- button {
+button {
     padding: 0.75rem;
     background-color: #333;
     color: #fff;
@@ -95,11 +95,13 @@ body {
     #cms-navbar {
         flex-direction: column;
     }
+
     #cms-navbar a {
         padding: 1rem;
         text-align: center;
         border-bottom: 1px solid #444;
     }
+
     #cms-navbar a:last-child {
         border-bottom: none;
     }
@@ -123,29 +125,29 @@ body {
 }
 
 .cms-item {
-    border-bottom:#333 dotted 1px;
+    border-bottom: #333 dotted 1px;
     padding: 20px 60px;
 }
 
 .cms-item h1 {
     font-family: 'Times New Roman', Times, serif;
     font-size: 2.5rem !important;
-    
+
 }
 
 .cms-item h2 {
-font-family: 'Times New Roman', Times, serif;
-font-size: 2.1rem !important;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.1rem !important;
 }
 
 .cms-item p {
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.8rem !important;
-    
+
 }
 
 .Delete {
-    background-color: red ;
+    background-color: red;
     padding: 10px 30px;
     font-size: 1.5rem;
 
@@ -153,7 +155,7 @@ font-size: 2.1rem !important;
 
 .Update {
     margin-top: 10px;
-    background-color: rgb(68, 205, 34) ;
+    background-color: rgb(68, 205, 34);
     padding: 10px 20px;
     font-size: 1.5rem;
 
@@ -161,7 +163,7 @@ font-size: 2.1rem !important;
 
 
 .booking-item {
-    border-bottom:#333 dotted 1px;
+    border-bottom: #333 dotted 1px;
     padding: 20px 60px;
 }
 
@@ -169,18 +171,58 @@ font-size: 2.1rem !important;
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
     font-size: 2.5rem !important;
-    
+
 }
 
 
 .booking-item p {
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.8rem !important;
-    
+
 }
 
 .delete-booking {
-    background-color: red ;
+    background-color: red;
     padding: 10px 30px;
     font-size: 1.5rem;
+}
+
+.modal-content textarea {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+
+}
+
+.modal-content input {
+    font-size: 1rem !important;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+
+}
+
+.modal-content select {
+    margin-bottom: 10px;
+    font-size: 1rem !important;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+select option {
+    display: flex;
+    width: 100%;
+    max-width: 20px;
+    font-size: 1rem;
+
+}
+
+.close{
+    font-size: 2rem;
 }

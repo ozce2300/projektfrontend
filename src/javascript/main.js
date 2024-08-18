@@ -350,6 +350,7 @@ if (containerBigCms) {
                 })
                 .then(data => {
                     console.log('Meny tillagd:', data);
+                    location.reload();
                     menuForm.reset();
                     menySend.innerHTML = "Meny tillagd";
                 })
@@ -429,6 +430,93 @@ if (containerBigCms) {
         `;
         }
     }
+
+    //Uppdatera 
+    document.addEventListener('click', function(event) {
+        if(event.target.classList.contains('Update')) {
+            let id = event.target.dataset.id;
+            const token = localStorage.getItem('token');
+            let url = `https://api.dollar.se/api/cms/${id}`;
+    
+            fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Misslyckad hämtning");
+                }
+            })
+            .then(data => {
+                const item = data.results[0];
+                const category = item.category;
+                const name = item.name;
+                const description = item.description;
+                const price = item.price;
+    
+                // Fyll i modalen med hämtade data
+                document.getElementById('updateCategory').value = category;
+                document.getElementById('updateName').value = name;
+                document.getElementById('updateDescription').value = description;
+                document.getElementById('updatePrice').value = price;
+    
+                // Visa modalen
+                const modal = document.getElementById('updateModal');
+                modal.style.display = "block";
+    
+                // Hantera uppdateringsformuläret
+                const updateForm = document.getElementById('updateForm');
+                updateForm.onsubmit = function(e) {
+                    e.preventDefault();
+    
+                    const updatedItem = {
+                        category: document.getElementById('updateCategory').value,
+                        name: document.getElementById('updateName').value,
+                        description: document.getElementById('updateDescription').value,
+                        price: document.getElementById('updatePrice').value
+                    };
+    
+                    fetch(url, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(updatedItem)
+                    })
+                    .then(response => {
+                        if(response.ok) {
+                            alert('Maträtten uppdaterades!');
+                            modal.style.display = "none"; // Stäng modalen efter uppdatering
+                            location.reload(); // Uppdatera sidan för att visa ändringar
+                        } else {
+                            throw new Error("Misslyckad uppdatering");
+                        }
+                    })
+                    .catch(error => console.error('Error updating item:', error));
+                };
+    
+                // Stäng modal om användaren klickar på "stäng" knappen
+                document.querySelector('.close').addEventListener('click', function() {
+                    modal.style.display = "none";
+                });
+    
+                // Stäng modal om användaren klickar utanför modalen
+                window.addEventListener('click', function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching item:', error));
+        }
+    });
+    
 
     //Radera
     document.addEventListener('click', async function (event) {
@@ -567,17 +655,26 @@ if (menuContainer) {
 const containerBigBooking = document.getElementById('container-big-booking')
 
 if(containerBigBooking) {
+    window.onload = init()
+    function init() {
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'login.html'
+        }
+    }
     
     document.addEventListener('DOMContentLoaded', () => {
     const getBooking = document.getElementById('get-booking');
     const getBookingContent = document.getElementById('get-booking-content');
     const urlPostTable = "https://api.dollar.se/api/posttable"; 
+    const token = localStorage.getItem('token')
 
     // Hämtar bokningar
     fetch(urlPostTable, {
         method: "GET",  
         headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+
         }
     })
     .then(response => {
@@ -617,7 +714,7 @@ if(containerBigBooking) {
     });
 
     document.body.addEventListener('click', function(event) {
-        if (event.target && event.target.classList.contains('delete-booking')) {
+        if (event.target.classList.contains('delete-booking')) {
             const id = event.target.dataset.id;
             const url = `https://api.dollar.se/api/posttable/${id}`;
             const token = localStorage.getItem('token');
@@ -626,6 +723,7 @@ if(containerBigBooking) {
                 method: "DELETE", 
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
                 }
             })
             .then(response => {

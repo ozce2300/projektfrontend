@@ -11,6 +11,7 @@
 </head>
 <header id="cms-header">
     <nav id="cms-navbar">
+        <a href="index.html">Hem</a>
         <a href="bokning.html">Bokningar</a>
         <a href="cms.html">Maträtter</a>
     </nav>
@@ -21,6 +22,7 @@
         <main id="cms-main">
             <div id="cms-form-container" class="form-container">
                 <h1>Maträtter</h1>
+                
                 <form id="menu-form">
                     <label for="category">Kategori:</label>
                     <select id="category" name="category">
@@ -53,6 +55,34 @@
             </div>
         </main>
     </div>
+
+      <!-- Modal för uppdatering -->
+      <div id="updateModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Uppdatera Maträtt</h2>
+            <form id="updateForm">
+                <label for="updateCategory">Kategori:</label>
+                <select id="updateCategory" name="category">
+                    <option value="Hamburgare">Hamburgare</option>
+                    <option value="Vin">Vin</option>
+                    <option value="Efterrätt">Efterrätt</option>
+                </select>
+
+                <label for="updateName">Namn:</label>
+                <input type="text" id="updateName" name="name" required />
+
+                <label for="updateDescription">Beskrivning:</label>
+                <textarea id="updateDescription" name="description" rows="4" required></textarea>
+
+                <label for="updatePrice">Pris:</label>
+                <input type="number" id="updatePrice" name="price" step="0.01" required />
+
+                <button type="submit">Uppdatera</button>
+            </form>
+        </div>
+    </div>
+
 </body>
 
 </html>

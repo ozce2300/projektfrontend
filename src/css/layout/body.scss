@@ -130,6 +130,11 @@ main {
     cursor: pointer;
 }
 
+.p-menu:hover {
+    text-decoration: underline; 
+    text-underline-offset: 10px; 
+}
+
 
 #main-side-inner-three {
     display: flex;
@@ -164,6 +169,7 @@ form input[type="tel"],
 form input[type="email"],
 form input[type="date"],
 form input[type="time"],
+form input[type="number"],
 form input[type="password"] {
     width: 100%;
     padding: 12px;
