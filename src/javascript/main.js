@@ -79,7 +79,9 @@ if (header) {
 // funktion för modal
 function showModal() {
     const modal = document.getElementById('bookingConfirmationModal');
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
+    modal.style.flexDirection = 'column';
+    modal.style.justifyContent = 'center';
 
     // stäng modal
     const closeModalButton = document.getElementById('closeModal');
@@ -467,8 +469,9 @@ if (containerBigCms) {
 
                     // Visa modalen
                     const modal = document.getElementById('updateModal');
-                    modal.style.display = "block";
-
+                    modal.style.display = 'flex';
+                    modal.style.flexDirection = 'column';
+                    modal.style.justifyContent = 'center';
                     // Hantera uppdateringsformuläret
                     const updateForm = document.getElementById('updateForm');
                     updateForm.onsubmit = function (e) {
